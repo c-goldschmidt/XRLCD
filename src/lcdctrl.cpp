@@ -20,6 +20,7 @@ void LCDController::setValues(LogParser::infopackage pkg) {
 	if (!isInitialized) {
 		return;
 	}
+	qDebug() << "updating lcd panel";
 
 	wchar_t text[1024];
 

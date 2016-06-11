@@ -7,7 +7,7 @@ class LogParser : public QObject
 	Q_OBJECT
 
 public:
-	LogParser(QObject *parent = 0);
+	LogParser(QSettings* settings, QObject *parent = 0);
 
 	struct infopackage {
 		double currentShield = 0;
@@ -19,7 +19,7 @@ public:
 
 private:
 	QRegularExpression rx;
-	const static QString SCRIPT_IDENT;
+	QSettings* settings;
 	void createInfoPackage(QString match);
 
 public slots:

@@ -22,7 +22,7 @@ private:
 	LogParser* parser;
 	LCDController* ctrl;
 	QFile* file;
-	const static QString LOGFILE;
+	QSettings* settings;
 
 signals:
 	void runAgain();

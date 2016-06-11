@@ -1,9 +1,9 @@
 #include "logparser.h"
 
-const QString LogParser::SCRIPT_IDENT = QString("md.test.test_interval");
+LogParser::LogParser(QSettings* settings, QObject *parent) : QObject(parent) {
 
-LogParser::LogParser(QObject *parent) : QObject(parent) {
-	QString regexPattern = "^\\[Scripts\\] (\\d+\\.\\d+).+Context:" + QRegularExpression::escape(SCRIPT_IDENT) + ".+: (.+)$";
+	QString script_ident = settings->value("main/ident", "md.XRLCDMain.XRLCD_interval").toString();
+	QString regexPattern = "^\\[Scripts\\] (\\d+\\.\\d+).+Context:" + QRegularExpression::escape(script_ident) + ".+: (.+)$";
 	rx = QRegularExpression(
 		regexPattern,
 		QRegularExpression::CaseInsensitiveOption | QRegularExpression::MultilineOption
