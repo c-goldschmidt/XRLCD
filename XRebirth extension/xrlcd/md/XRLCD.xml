@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mdscript name="XRLCDMain" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../modding/md.xsd">
+	<cues>
+		<cue name="XRLCD_Start" instantiate="false" namespace="this">
+			<conditions>
+				<check_any>
+					<!-- Will fire once on every game load, but not on new game -->
+					<event_player_created />
+					<!-- Will fire as long as game is less than 20 seconds old -->
+					<event_cue_signalled cue="md.Setup.GameStart" />
+				</check_any>
+			</conditions>
+			<actions>
+				<!-- version number -->
+				<set_value name="$iMajorVersion" exact="0" />
+				<set_value name="$iMinorVersion" exact="0" />
+				<set_value name="$iBugfixVersion" exact="1" />
+				<set_value name="$sVersion" exact="'%1.%2.%3'.[$iMajorVersion,$iMinorVersion,$iBugfixVersion]" />
+			</actions>
+			
+			<cues>
+				<cue name="XRLCD_interval" checkinterval="1s" instantiate="true">
+					<condition>
+						<check_all>
+							<cue_is_complete cue="test_Start"/>
+						</check_all>
+					</condition>
+					<actions>
+						<set_value name="$ps" exact="player.ship"/>
+						<debug_text text="'%1,%2,%3,%4,%5'.[$ps.shield,$ps.maxshield,$ps.hull,$ps.maxhull,player.money]"/>
+					</actions>
+				</cue>
+			</cues>
+		</cue>
+	</cues>
+</mdscript>
